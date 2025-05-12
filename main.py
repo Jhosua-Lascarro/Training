@@ -1,6 +1,6 @@
 # main.py
 
-from datetime import datetime as time
+from datetime import datetime
 
 from pandas import read_excel
 
@@ -14,11 +14,12 @@ from app.utils.options import (
     get_update_product,
 )
 
-file_path: str = check_file(capture_path_file())
+file_path: str = check_file(capture_path_file())  # type: ignore
 invent = Inventory(read_excel(file_path), file_path)
+
 while True:
     match option := input(
-        f"Fecha: {time.now().date}\nSistema de gestion de inventario.\n\n"
+        f"Fecha: {datetime.now().date()}\nSistema de gestion de inventario.\n\n"
         "[1]. Añadir producto.\n"
         "[2]. Consultar productos.\n"
         "[3]. Actualizar producto.\n"
@@ -31,7 +32,6 @@ while True:
             get_add_product(invent)
 
         case "2":
-            print("You chose 2")
             get_show_products(invent)
         case "3":
             get_update_product(invent)
@@ -40,7 +40,6 @@ while True:
         case "5":
             get_total_inventario(invent)
         case "6":
-            print("You chose 6")
             break
 
         case _:

@@ -7,12 +7,13 @@ from openpyxl import Workbook
 
 
 # manejo de la ubicacion de la database
-def check_file(path_file: str) -> str:
+def check_file(path_file: str) -> str | None:
     """Creates the database file if it doesn't exist."""
+    file_path: str = path_file + "database.xlsx"
 
     if Path(path_file).exists():
-        print(f"El archivo en la ruta '{path_file}' ya existe.")
-    file_path = path_file + "database.xlsx"
+        print("Database cargada...")
+        return file_path
     Path(path_file).mkdir(parents=True)
     book = Workbook()
     book.active.append(["Producto", "Precio", "Cantidad"])  # type: ignore
