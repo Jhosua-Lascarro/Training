@@ -7,22 +7,23 @@ from openpyxl import Workbook
 
 
 # manejo de la ubicacion de la database
-def check_file(path_file: str) -> bool:
+def check_file(path_file: str) -> str:
     """Creates the database file if it doesn't exist."""
 
     if Path(path_file).exists():
-        raise FileExistsError(f"El archivo en la ruta '{path_file}' ya existe.")
-
+        print(f"El archivo en la ruta '{path_file}' ya existe.")
+    file_path = path_file + "database.xlsx"
+    Path(path_file).mkdir(parents=True)
     book = Workbook()
     book.active.append(["Producto", "Precio", "Cantidad"])  # type: ignore
-    book.save(path_file)
-    return False
+    book.save(file_path)
+    return file_path
 
 
 def capture_path_file() -> str:
     """Retorna la ruta de la base de datos segun la fecha."""
     date: datetime = datetime.now()
-    return rf"./app/data/{date.year}/{date.month}/database.xlsx"
+    return rf"./app/data/{date.year}/{date.month}/"
 
 
 # funciones manejo de entrada de datos

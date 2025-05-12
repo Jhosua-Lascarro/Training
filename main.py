@@ -6,10 +6,15 @@ from pandas import read_excel
 
 from app.utils.helper import capture_path_file, check_file
 from app.utils.inventary import Inventory
-from app.utils.options import get_add_product, get_show_products
+from app.utils.options import (
+    get_add_product,
+    get_delete_product,
+    get_show_products,
+    get_total_inventario,
+    get_update_product,
+)
 
-file_path: str = capture_path_file()
-check_file(file_path)
+file_path: str = check_file(capture_path_file())
 invent = Inventory(read_excel(file_path), file_path)
 while True:
     match option := input(
@@ -24,19 +29,16 @@ while True:
     ):
         case "1":
             get_add_product(invent)
+
         case "2":
             print("You chose 2")
             get_show_products(invent)
-
         case "3":
-            print("You chose 3")
-
+            get_update_product(invent)
         case "4":
-            print("You chose 4")
-
+            get_delete_product(invent)
         case "5":
-            print("You chose 5")
-
+            get_total_inventario(invent)
         case "6":
             print("You chose 6")
             break
