@@ -73,4 +73,4 @@ class Inventory:
         if self._data.empty:
             raise ValueError("El inventario está vacío.")
 
-        return float(self._data["Precio"].sum())
+        return float(self._data["Precio"].sum() * self._data["Cantidad"].sum())
